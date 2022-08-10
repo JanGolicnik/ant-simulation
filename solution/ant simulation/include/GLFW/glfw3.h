@@ -317,7 +317,8 @@ extern "C" {
  */
 #define GLFW_FALSE                  0
 
-/*! @name Key and button actions
+/*! @name Key and 
+actions
  *  @{ */
 /*! @brief The key or mouse button was released.
  *
