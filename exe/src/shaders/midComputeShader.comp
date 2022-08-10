@@ -42,6 +42,7 @@ vec3 sense(float distance, ag agent, float offset){
     y += distance * sin(angle);
 
     vec3 sensorValue = texelFetch(uTexture, ivec2(x, y), 0).rgb;
+    //sensorValue = clamp(sensorValue, 0.0f, 1.0f);
     sensorValue *= agent.color.rgb;
     return sensorValue;
 }
@@ -58,11 +59,8 @@ uint rand(uint state){
 }
 
 void main(){
-
-
     ivec2 ipos = ivec2(gl_GlobalInvocationID.xy);
     uint pos = gl_GlobalInvocationID.x;
-    //int pos = int(ipos.x + (ipos.y * 1000));
 
     //sense
     vec3 rightS = sense(uVars.y, agents.d[pos], -uVars.z);
@@ -79,11 +77,8 @@ void main(){
     //mouse
     agents.d[pos].values.z += (atan(agents.d[pos].values.y- uMouse.y, agents.d[pos].values.x - uMouse.x) * 180 / PI) / distance(uMouse, agents.d[pos].values.xy);
 
-    //do something when offscreen
+    //tp to middle if offscreen
     if(agents.d[pos].values.y > uRes.y || agents.d[pos].values.y < 0 || agents.d[pos].values.x > uRes.x || agents.d[pos].values.x < 0){
-        //agents.d[pos].values.x += cos((agents.d[pos].values.z)* 0.0174532925f);
-        //agents.d[pos].values.y += sin((agents.d[pos].values.z)* 0.0174532925f);
-        //agents.d[pos].values.z = (rand(uint(abs(agents.d[pos].values.x * uRes + agents.d[pos].values.y * uRes))) / 4294967295.0f) * 360.0f;
         agents.d[pos].values.xy = vec2(uRes/2);
     }
 
@@ -91,13 +86,6 @@ void main(){
     agents.d[pos].values.x += cos(agents.d[pos].values.z * 0.0174532925f);
     agents.d[pos].values.y += sin(agents.d[pos].values.z * 0.0174532925f);
 
-    //makes them big but is pretty slow
-    //for(int i = 0; i < 9; i++){
-    //    imageStore(texture, ivec2(agents.d[pos].xy + offset[i]), vec4(1.0f));
-    //}
-
     //save them to the texture
     imageStore(texture, ivec2(agents.d[pos].values.xy), vec4(agents.d[pos].color.rgb, 1.0f));
-        
-
 }

@@ -1,4 +1,7 @@
-﻿  simulation.cpp
+﻿  main.cpp
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+  simulation.cpp
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\src\simulation.cpp(118,52): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
@@ -29,9 +32,20 @@ C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\src\simulation
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\src\simulation.cpp(663,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\src\simulation.cpp(669,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\src\simulation.cpp(679,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  glm.cpp
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  stb_image.cpp
+  glad.c
   Generating code
-  1 of 1992 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    24 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 1992 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   ant_sim.vcxproj -> C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\Release\ant sim.exe

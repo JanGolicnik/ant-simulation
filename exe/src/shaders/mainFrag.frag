@@ -50,7 +50,10 @@ void main()
 
     vec3 lap;
     for(int i = 0; i < 9; i++){
-        vec3 tmp = texelFetch(uFBTexture, ivec2(cP + offset[i]), 0).rgb;
+        ivec2 pos = ivec2(cP + offset[i]);
+        pos.x = pos.x % int(fRes.x);
+        pos.y = pos.y % int(fRes.y);
+        vec3 tmp = texelFetch(uFBTexture, pos, 0).rgb;
         lap += vec3(tmp * kernel[i]);
     }
 
@@ -64,10 +67,20 @@ void main()
     //}
 
     float dif = 1.0f;
-    FragColor.r = (FragColor.r + ( lap.r * dif)) - uVars.x;
-    FragColor.g = (FragColor.g + ( lap.g * dif)) - uVars.x;
-    FragColor.b = (FragColor.b + ( lap.b * dif)) - uVars.x;
+    FragColor.r = (FragColor.r + ( lap.r * dif));
+    FragColor.g = (FragColor.g + ( lap.g * dif));
+    FragColor.b = (FragColor.b + ( lap.b * dif));
 
+    FragColor.rgb -= uVars.x;
+
+    //if(FragColor.r > 0)
+    //FragColor.r -= uVars.x;
+    //    if(FragColor.g > 0)
+    //FragColor.g -= uVars.x;
+    //    if(FragColor.b > 0)
+    //FragColor.b -= uVars.x;
+
+    //FragColor = clamp(FragColor, -1.0f, 1.0f);
     FragColor = clamp(FragColor, 0.0f, 1.0f);
 
    // FragColor = vec4(texelFetch(uFBTexture, ivec2(cP), 0).rgb, 1.0f);

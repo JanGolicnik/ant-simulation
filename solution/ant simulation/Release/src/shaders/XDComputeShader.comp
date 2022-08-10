@@ -1,0 +1,89 @@
+#version 460 core
+
+#define PI 3.14159265359
+
+struct ag{
+    vec4 values;
+    vec4 color;
+};
+
+layout(local_size_x = 128, local_size_y = 1, local_size_z = 1) in;
+
+layout(rgba32f, binding = 1) uniform image2D texture;
+
+layout(std430, binding = 4) buffer agent_data {
+    ag d[];
+} agents;
+
+layout (location = 0) uniform float uTime;
+layout (location = 1) uniform sampler2D uTexture;
+layout (location = 2) uniform vec4 uVars; // x weight, y dist, z angle, a randomness
+layout (location = 3) uniform ivec2 uRes;
+layout (location = 4) uniform ivec2 uMouse;
+
+const float w  = 1.0f;
+const float h  = 1.0f;
+
+const vec2 offset[9] = {
+    vec2(-w, -h), vec2(0.0f, -h), vec2(w, -h),
+    vec2(-w, 0.0f), vec2(0.0f, 0.0f), vec2(w, 0.0f),
+    vec2(-w, h), vec2(0.0f, h), vec2(w, h)
+};
+
+vec3 sense(float distance, ag agent, float offset){
+    agent.values.z += offset;
+
+    float x = (agent.values.x / uRes.x) * 1000;
+    float y = (agent.values.y / uRes.y) * 1000;
+
+    float angle = agent.values.z * 0.0174532925f;
+    
+    x += distance * cos(angle);
+    y += distance * sin(angle);
+
+    vec3 sensorValue = texelFetch(uTexture, ivec2(x, y), 0).rgb;
+    //sensorValue = clamp(sensorValue, 0.0f, 1.0f);
+    sensorValue *= agent.color.rgb;
+    return sensorValue;
+}
+
+uint rand(uint state){
+    state ^= 2747636419u;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    return state;
+    //maximum 4294967295.0f
+}
+
+void main(){
+    ivec2 ipos = ivec2(gl_GlobalInvocationID.xy);
+    uint pos = gl_GlobalInvocationID.x;
+
+    //sense
+    vec3 rightS = sense(uVars.y, agents.d[pos], -uVars.z);
+    vec3 leftS = sense(uVars.y, agents.d[pos], uVars.z);
+
+    if(rightS.r > leftS.r || rightS.g > leftS.g){
+        agents.d[pos].values.z -= uVars.x * (rightS.r + rightS.g);
+    }else
+        agents.d[pos].values.z += uVars.x * (leftS.r  + leftS.g);
+
+    //random
+    agents.d[pos].values.z += uVars.a * (((rand(uint(abs(agents.d[pos].values.x * uRes + agents.d[pos].values.y * uRes))) / 4294967295.0f) * 360.0f) - 190 ) * 0.01f;
+
+    //mouse
+    agents.d[pos].values.z += (atan(agents.d[pos].values.y- uMouse.y, agents.d[pos].values.x - uMouse.x) * 180 / PI) / distance(uMouse, agents.d[pos].values.xy);
+
+    //move
+    agents.d[pos].values.x += cos(agents.d[pos].values.z * 0.0174532925f);
+    agents.d[pos].values.y += sin(agents.d[pos].values.z * 0.0174532925f);
+
+    agents.d[pos].values.x = int(agents.d[pos].values.x) % uRes.x;
+    agents.d[pos].values.y = int(agents.d[pos].values.y) % uRes.y;
+
+    //save them to the texture
+    imageStore(texture, ivec2(agents.d[pos].values.xy), vec4(agents.d[pos].color.rgb, 1.0f));
+}
