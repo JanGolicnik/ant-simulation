@@ -65,7 +65,12 @@ void main(){
     //sense
     vec3 rightS = sense(uVars.y, agents.d[pos], -uVars.z);
     vec3 leftS = sense(uVars.y, agents.d[pos], uVars.z);
+    vec3 centerS = sense(uVars.y, agents.d[pos], 0);
 
+    if(centerS.r > leftS.r && centerS.r > rightS.r && centerS.g > rightS.g && centerS.g > leftS.g){
+        agents.d[pos].values.z += 0;
+    
+    }
     if(rightS.r > leftS.r || rightS.g > leftS.g){
         agents.d[pos].values.z -= uVars.x * (rightS.r + rightS.g);
     }else
