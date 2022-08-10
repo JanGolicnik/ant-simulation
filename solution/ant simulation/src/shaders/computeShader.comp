@@ -1,0 +1,85 @@
+#version 460 core
+
+#define PI 3.14159265359
+
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
+layout(rgba32f, binding = 1) uniform image2D texture;
+
+layout(std430, binding = 4) buffer agent_data {
+    vec4 d[];
+} agents;
+
+layout (location = 0) uniform float uTime;
+layout (location = 1) uniform sampler2D uTexture;
+layout (location = 2) uniform vec4 uVars; // x weight, y dist, z angle, a randomness
+layout (location = 3) uniform ivec2 uRes;
+
+const float w  = 1.0f;
+const float h  = 1.0f;
+
+const vec2 offset[9] = {
+    vec2(-w, -h), vec2(0.0f, -h), vec2(w, -h),
+    vec2(-w, 0.0f), vec2(0.0f, 0.0f), vec2(w, 0.0f),
+    vec2(-w, h), vec2(0.0f, h), vec2(w, h)
+};
+
+vec3 sense(float distance, vec4 agent, float offset){
+    agent.z += offset;
+
+    float x = (agent.x / uRes.x) * 1000;
+    float y = (agent.y / uRes.y) * 1000;
+
+    float angle = agent.z * 0.0174532925f;
+    
+    x += distance * cos(angle);
+    y += distance * sin(angle);
+
+    vec3 sensorValue = texelFetch(uTexture, ivec2(x, y), 0).rgb;
+
+    return sensorValue;
+}
+
+uint rand(uint state){
+    state ^= 2747636419u;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    return state;
+    //maximum 4294967295.0f
+}
+
+void main(){
+    uint pos = gl_GlobalInvocationID.x;
+
+    vec3 rightS = sense(uVars.y, agents.d[pos], -uVars.z);
+    vec3 leftS = sense(uVars.y, agents.d[pos], uVars.z);
+    //vec3 centerS = sense(uVars.y, agents.d, 0);
+
+    if(rightS.r > leftS.r){
+        agents.d[pos].z -= uVars.x * rightS.r;
+    }else
+        agents.d[pos].z += uVars.x * leftS.r;
+
+    agents.d[pos].z += uVars.a * (((rand(uint(abs(agents.d[pos].x * uRes + agents.d[pos].y * uRes))) / 4294967295.0f) * 360.0f) - 190 ) * 0.01f;
+
+    if(agents.d[pos].y > uRes.y || agents.d[pos].y < 0 || agents.d[pos].x > uRes.x || agents.d[pos].x < 0){
+        //agent.x += cos((agent.z)* 0.0174532925f);
+        //agent.y += sin((agent.z)* 0.0174532925f);
+       //agent.z = (rand(uint(abs(agent.x * uRes + agent.y * uRes))) / 4294967295.0f) * 360.0f;
+        agents.d[pos].xy = vec2(uRes/2);
+    }
+
+    agents.d[pos].x += cos(agents.d[pos].z * 0.0174532925f);
+    agents.d[pos].y += sin(agents.d[pos].z * 0.0174532925f);
+
+    //agent.x = int(agent.x) % uRes.x;
+    //agent.y = int(agent.y) % uRes.y;
+
+
+    for(int i = 0; i < 9; i++){
+        imageStore(texture, ivec2(agents.d[pos].xy + offset[i]), vec4(1.0f));
+    }
+}

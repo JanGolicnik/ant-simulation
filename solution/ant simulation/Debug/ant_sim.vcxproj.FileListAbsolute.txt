@@ -1,0 +1,2 @@
+C:\Users\jan\OneDrive\Namizje\ComShaderImGui\ant simulation\Debug\ant sim.exe
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\Debug\ant sim.exe
