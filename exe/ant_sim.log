@@ -1,0 +1,47 @@
+﻿  glad.c
+  glm.cpp
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+  stb_image.cpp
+  main.cpp
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+  simulation.cpp
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(48,30): warning C4201: nonstandard extension used: nameless struct/union
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\vendor\glm\detail\type_quat.hpp(133): message : see reference to class template instantiation 'glm::qua<T,Q>' being compiled
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(99,52): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(99,33): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(106,28): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(194,53): warning C4312: 'type cast': conversion from 'GLuint' to 'ImTextureID' of greater size
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(203,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(203,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(206,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(206,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(139,44): warning C4100: 'window': unreferenced formal parameter
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(417,69): warning C4100: 'mods': unreferenced formal parameter
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(417,33): warning C4100: 'window': unreferenced formal parameter
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(448,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(454,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(464,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(486,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(509,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(514,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(524,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(538,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(544,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(549,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(568,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(574,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\ants\src\simulation.cpp(584,108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1991 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ant_sim.vcxproj -> C:\dev\c++\OpenGL\projects\ComShaderImGui\solution\ant simulation\Release\ant sim.exe
