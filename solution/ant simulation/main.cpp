@@ -79,9 +79,12 @@ int main(int, char**)
     double dtime = 0;
     double ltime = 0;
     double lupdate = 0;
+    double lframe = 0;
     double ntime = 0;
+    int update = 0;
     int frame = 0;
-    int updateSpeed = 1000;
+    int updateSpeed = 100;
+    int uiUpdate = 120;
 
     // Main loop
     while (!glfwWindowShouldClose(window))
@@ -92,45 +95,45 @@ int main(int, char**)
         ltime = ntime;
 
         lupdate += dtime;
-
+        lframe += dtime;
 
         glfwPollEvents();
 
         if (lupdate >= 1.0 / updateSpeed) {
-            frame++;
-
             sim::compute(window);
-
-            lupdate = 0;
+           lupdate = 0;
         }
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        //if (lframe >= 1.0 / uiUpdate) {
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
 
-        sim::renderGUI(io, window, &updateSpeed);
+            sim::renderGUI(io, window, &updateSpeed);
 
-        //ImGui::ShowDemoWindow();
+            ImGui::ShowDemoWindow();
 
-        // Rendering
-        ImGui::Render();
-        int display_w, display_h;
+            // Rendering
+            ImGui::Render();
+            int display_w, display_h;
 
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            glfwGetFramebufferSize(window, &display_w, &display_h);
+            glViewport(0, 0, display_w, display_h);
+            glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+            glClear(GL_COLOR_BUFFER_BIT);
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-        {
-            GLFWwindow* backup_current_context = glfwGetCurrentContext();
-            ImGui::UpdatePlatformWindows();
-            ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(backup_current_context);
-        }
+            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+            {
+                GLFWwindow* backup_current_context = glfwGetCurrentContext();
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent(backup_current_context);
+            }
 
-        glfwSwapBuffers(window);
-
+            glfwSwapBuffers(window);
+        //    lframe = 0;
+        //}
+        
     }
 
     // Cleanup

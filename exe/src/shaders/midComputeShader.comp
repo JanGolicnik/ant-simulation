@@ -69,9 +69,7 @@ void main(){
 
     if(centerS.r > leftS.r && centerS.r > rightS.r && centerS.g > rightS.g && centerS.g > leftS.g){
         agents.d[pos].values.z += 0;
-    
-    }
-    if(rightS.r > leftS.r || rightS.g > leftS.g){
+    }else if(rightS.r > leftS.r || rightS.g > leftS.g){
         agents.d[pos].values.z -= uVars.x * (rightS.r + rightS.g);
     }else
         agents.d[pos].values.z += uVars.x * (leftS.r  + leftS.g);

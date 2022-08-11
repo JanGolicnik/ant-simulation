@@ -302,8 +302,6 @@ namespace sim {
         if (ImGui::Button("it wraps around"))
             currShader = infCompShader;
 
-
-
         ImGui::End();
     }
 
